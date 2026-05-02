@@ -42,6 +42,7 @@ void setup() {
   Serial.begin(9600);
   gb.begin();
   Serial.println("Started");
+
 }
 
 void drawBlock(byte arr[4][4], int x, int y) {
@@ -60,17 +61,22 @@ void wipeBlock(byte arr[4][4], int x, int y) {
 
 void makeMove(){
   if (getKey()==4){
-    x--;
+     x--;
   }
   if (getKey()==5){
-    x++;
+      x++;
   }
+  
 }
 
+
+
 void loop() {
-  wipeBlock(S_Block_1, x,y);
+  
   makeMove();
-  drawBlock(S_Block_1, x,y);
+  gb.drawDisplay();
+  drawBlock(gb.block[rot], x,y);
   y++;
-  delay(100);
+   if (y>Brd_H)y=;
+   delay(200);
 }

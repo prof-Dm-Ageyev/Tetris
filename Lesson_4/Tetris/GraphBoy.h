@@ -16,6 +16,11 @@ const uint16_t COL_STATUS = 0x0841; // темний синій (бокові п�
 const uint16_t COL_TEXT   = 0xFFFF; // білий текст
 
 struct GraphBoy{
+bool display[Brd_W][Brd_H];
+byte block[4][4][4];
+
+void memDisplay(short int x,short int y); 
+void drawDisplay();
 void drawPoint(uint8_t col, uint8_t row);
 void drawPoint(uint8_t col, uint8_t row, uint16_t color);
 void wipePoint(uint8_t col, uint8_t row);
@@ -24,7 +29,58 @@ void drawField();
 void drawPanels();
 void begin();
 void clearDisplay();
+void generateBlock(byte block[4][4][4], byte arr1[4][4], byte arr2[4][4], byte arr3[4][4], byte arr4[4][4]);
+void memBlock(byte arr[4][4], int x, int y);
+bool checkCollision(int x, int y);
+bool checkBlockCollision(byte arr[4][4], int x, int y);
 };
+
+void GraphBoy::generateBlock(byte block[4][4][4], byte arr1[4][4], byte arr2[4][4], byte arr3[4][4], byte arr4[4][4] ) {
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      block[0][i][j] = arr1[i][j];
+      block[1][i][j] = arr2[i][j];
+      block[2][i][j] = arr3[i][j];
+      block[3][i][j] = arr4[i][j];
+    }
+  }
+}
+
+void GraphBoy::memBlock(byte arr[4][4], int x, int y) {
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (arr[j][i] == 1) {
+        memDisplay(x + i, y + j);
+      }
+    }
+  }
+}
+
+bool GraphBoy::checkCollision(int x, int y){
+    if(x < Brd_W && x > -1){
+        if(display[x][y] == 1 || y > (Brd_H - 1)) return true;
+        else return false;
+    }
+    else return true;
+}
+
+bool GraphBoy::checkBlockCollision(byte arr[4][4], int x, int y) {
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (arr[j][i] == 1 && (checkCollision(x + i, y + j))) return true;
+    }
+  }
+  return false;
+}
+
+void GraphBoy::drawDisplay(){
+    for(int x = 0; x < Brd_W; x++){
+        for(int y = 0; y < Brd_H; y++){
+           if (display[x][y]) drawPoint(x, y); 
+           else wipePoint(x, y);
+        }
+    }
+}
 
 void GraphBoy::drawPanels(){
    drawLabel(0, 10, "SCORE");
