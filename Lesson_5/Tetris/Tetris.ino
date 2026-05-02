@@ -42,7 +42,7 @@ void setup() {
   Serial.begin(9600);
   gb.begin();
   Serial.println("Started");
-
+  createBlock(random(0,7));
 }
 
 void drawBlock(byte arr[4][4], int x, int y) {
@@ -61,16 +61,18 @@ void wipeBlock(byte arr[4][4], int x, int y) {
 
 void makeMove(){
   if (getKey()==4){
-     x--;
+    if (!gb.checkBlockCollision(gb.block[rot], x-1, y))  x--;
   }
   if (getKey()==5){
-      x++;
+    if (!gb.checkBlockCollision(gb.block[rot], x+1, y))  x++;
   }
-  
+  if (getKey()==1)
+    if (!gb.checkBlockCollision(gb.block[(rot + 1) % 4], x, y)) 
+      rot = (rot + 1) % 4;
 }
 
 void createBlock(int num){
- // x=3; y= -1; rot = random(0,4); 
+  x=3; y= -1; rot = random(0,4); 
   if(num == 0) gb.generateBlock(gb.block, I_Block_1, I_Block_2, I_Block_3, I_Block_4);
   if(num == 1) gb.generateBlock(gb.block, Z_Block_1, Z_Block_2, Z_Block_3, Z_Block_4);
   if(num == 2) gb.generateBlock(gb.block, S_Block_1, S_Block_2, S_Block_3, S_Block_4);
@@ -86,6 +88,6 @@ void loop() {
   gb.drawDisplay();
   drawBlock(gb.block[rot], x,y);
   y++;
-   if (y>Brd_H)y=0;
+   if (y>Brd_H)createBlock(random(0,7));
    delay(200);
 }
