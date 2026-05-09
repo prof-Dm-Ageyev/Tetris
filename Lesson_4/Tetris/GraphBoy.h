@@ -35,6 +35,10 @@ bool checkCollision(int x, int y);
 bool checkBlockCollision(byte arr[4][4], int x, int y);
 };
 
+void GraphBoy::memDisplay(short int x,short int y){
+  display[x][y] = 1;
+}; 
+
 void GraphBoy::generateBlock(byte block[4][4][4], byte arr1[4][4], byte arr2[4][4], byte arr3[4][4], byte arr4[4][4] ) {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
@@ -123,6 +127,9 @@ void GraphBoy::begin(){
     tft.fillScreen(COL_BG);
     drawField();
     drawPanels();
+    for (uint8_t row = 0; row < Brd_H; ++row) 
+        for (uint8_t col = 0; col < Brd_W; ++col) 
+          display[col][row] = 0;
 }
 
 void GraphBoy::drawPoint(uint8_t col, uint8_t row){

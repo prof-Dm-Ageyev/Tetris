@@ -23,7 +23,6 @@ bool readTouch(int16_t &sx, int16_t &sy) {
   return (sx >= 0 && sx < 240 && sy >= 0 && sy < 320);
 }
 
-// Зони: 1=ліво, 2=право, 3=поворот, 4=вниз, 5=рестарт
 // Зони: 4=ліво, 5=право, 1=поворот, 6=вниз, 2=рестарт
 uint8_t getKey(){
   int16_t sx, sy;
@@ -42,7 +41,6 @@ void setup() {
   Serial.begin(9600);
   gb.begin();
   Serial.println("Started");
-
 }
 
 void drawBlock(byte arr[4][4], int x, int y) {
@@ -66,26 +64,16 @@ void makeMove(){
   if (getKey()==5){
       x++;
   }
-  
-}
-
-void createBlock(int num){
- // x=3; y= -1; rot = random(0,4); 
-  if(num == 0) gb.generateBlock(gb.block, I_Block_1, I_Block_2, I_Block_3, I_Block_4);
-  if(num == 1) gb.generateBlock(gb.block, Z_Block_1, Z_Block_2, Z_Block_3, Z_Block_4);
-  if(num == 2) gb.generateBlock(gb.block, S_Block_1, S_Block_2, S_Block_3, S_Block_4);
-  if(num == 3) gb.generateBlock(gb.block, L_Block_1, L_Block_2, L_Block_3, L_Block_4);
-  if(num == 4) gb.generateBlock(gb.block, J_Block_1, J_Block_2, J_Block_3, J_Block_4);
-  if(num == 5) gb.generateBlock(gb.block, T_Block_1, T_Block_2, T_Block_3, T_Block_4);
-  if(num == 6) gb.generateBlock(gb.block, O_Block_1, O_Block_2, O_Block_3, O_Block_4);
 }
 
 void loop() {
-  
+  wipeBlock(S_Block_1, x,y);
   makeMove();
-  gb.drawDisplay();
-  drawBlock(gb.block[rot], x,y);
   y++;
-   if (y>Brd_H)y=0;
-   delay(200);
+  if (y>Brd_H)y=0;
+  drawBlock(S_Block_1, x,y); 
+  delay(200);
 }
+
+
+

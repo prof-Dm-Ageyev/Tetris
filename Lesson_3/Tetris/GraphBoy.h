@@ -44,9 +44,6 @@ void GraphBoy::drawPanels(){
 }
 
 void GraphBoy::clearDisplay(){
- /*tft.fillRect(FldLeft + FldW, 0, FldLeft, 320, COL_BG);
-  drawField();
-  drawPanels();*/
   for (uint8_t row = 0; row < Brd_H; ++row) {
         for (uint8_t col = 0; col < Brd_W; ++col) {
             wipePoint(col,row);

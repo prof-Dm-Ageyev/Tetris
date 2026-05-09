@@ -23,7 +23,6 @@ bool readTouch(int16_t &sx, int16_t &sy) {
   return (sx >= 0 && sx < 240 && sy >= 0 && sy < 320);
 }
 
-// Зони: 1=ліво, 2=право, 3=поворот, 4=вниз, 5=рестарт
 // Зони: 4=ліво, 5=право, 1=поворот, 6=вниз, 2=рестарт
 uint8_t getKey(){
   int16_t sx, sy;
@@ -41,8 +40,10 @@ int rot =0;
 void setup() {
   Serial.begin(9600);
   gb.begin();
-  Serial.println("Started");
+  randomSeed(analogRead(0) +
+      analogRead(5));
   createBlock(random(0,7));
+  Serial.println("Started");
 }
 
 void drawBlock(byte arr[4][4], int x, int y) {
@@ -61,14 +62,16 @@ void wipeBlock(byte arr[4][4], int x, int y) {
 
 void makeMove(){
   if (getKey()==4){
-    if (!gb.checkBlockCollision(gb.block[rot], x-1, y))  x--;
-  }
+    if(!gb.checkBlockCollision(gb.block[rot], x - 1, y)){ 
+      x--;
+  }}
   if (getKey()==5){
-    if (!gb.checkBlockCollision(gb.block[rot], x+1, y))  x++;
-  }
+    if(!gb.checkBlockCollision(gb.block[rot], x + 1, y)){
+      x++;
+  }}
   if (getKey()==1)
     if (!gb.checkBlockCollision(gb.block[(rot + 1) % 4], x, y)) 
-      rot = (rot + 1) % 4;
+      rot = (rot + 1) % 4;  
 }
 
 void createBlock(int num){
@@ -83,11 +86,13 @@ void createBlock(int num){
 }
 
 void loop() {
-  
   makeMove();
+  if (gb.checkBlockCollision(gb.block[rot], x, y + 1)){
+    gb.memBlock(gb.block[rot], x, y);
+    createBlock(random(0,7));
+  } else y++;
+
   gb.drawDisplay();
   drawBlock(gb.block[rot], x,y);
-  y++;
-   if (y>Brd_H)createBlock(random(0,7));
-   delay(200);
+  delay(200);
 }
