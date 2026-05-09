@@ -1,16 +1,15 @@
 # Матеріали уроку 4
 
 ## Мета уроку
-- Ознайомлення з основами роботи з точскріном.
-- калібрування та налаштування сенсорного екрану.
-- Підготовка коду для подальшої роботи з фігурами,створюємо моделі фігур Тетріс. 
-- Працюємо з двовимірними масивами.
-- Вивід фігур на екран.
+- Генерація блоків на полі та їх відображення.
+- Обробка колізій з межами поля та іншими блоками.
+- фіксація блоків на полі.
+- ротація блоків.
 
 ## Презентація до уроку
 
-[Презентація початку уроку](https://docs.google.com/presentation/d/1TGffc73cRnitKw4k3kLaH2SA_HBxsk_Mrc3jIm8pGDo/edit?usp=sharing)
-[Презентація основної частини](https://docs.google.com/presentation/d/1QoIatPZyU5X33AEly0YquyyfRrS1V9P8dwb5ho7dJBo/edit?usp=sharing)
+[Презентація початку уроку](https://docs.google.com/presentation/d/1TGffc73cRnitKw4k3kLaH2SA_HBxsk_Mrc3jIm8pGDo/edit?usp=sharing)  
+[Презентація основної частини](https://docs.google.com/presentation/d/1QoIatPZyU5X33AEly0YquyyfRrS1V9P8dwb5ho7dJBo/edit?usp=sharing)  
 
 > [!NOTE]
 > 1. У презентації основної частини уроку у коді (на слайдах 10 та 16) наведена функція `gb.getKey()` яка є частиною бібліотеки `GameBoy.h`, яка не враховує специфіку вашого проекту.
@@ -44,7 +43,7 @@ void makeMove(){
 
 [Шаблон с файлами проекту](./Tetris/)
 
-[Файл з моделями фігур](./Tetris/Blocks.h)
-[Файл бібліотеки для роботи з екраном](./Tetris/GraphBoy.h)
-[Файл з основним кодом](./Tetris/Tetris.ino)
+[Файл з моделями фігур](./Tetris/Blocks.h)  
+[Файл бібліотеки для роботи з екраном](./Tetris/GraphBoy.h)  
+[Файл з основним кодом](./Tetris/Tetris.ino)  
 

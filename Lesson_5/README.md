@@ -9,7 +9,7 @@
 
 ## Презентація до уроку
 
-[Презентація уроку](https://docs.google.com/presentation/d/1TGffc73cRnitKw4k3kLaH2SA_HBxsk_Mrc3jIm8pGDo/edit?usp=sharing)
+[Презентація уроку](https://docs.google.com/presentation/d/1TGffc73cRnitKw4k3kLaH2SA_HBxsk_Mrc3jIm8pGDo/edit?usp=sharing)  
 
 ## Шаблон коду для уроку
 
@@ -17,7 +17,7 @@
 
 [Шаблон с файлами проекту](./Tetris/)
 
-[Файл з моделями фігур](./Tetris/Blocks.h)
-[Файл бібліотеки для роботи з екраном](./Tetris/GraphBoy.h)
-[Файл з основним кодом](./Tetris/Tetris.ino)
+[Файл з моделями фігур](./Tetris/Blocks.h)  
+[Файл бібліотеки для роботи з екраном](./Tetris/GraphBoy.h)  
+[Файл з основним кодом](./Tetris/Tetris.ino)  
 
